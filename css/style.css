@@ -1,0 +1,348 @@
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: #f8f8f8;
+    /* Light gray background, consistent with school website */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Modal styles from school website */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1000;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 2.5rem;
+    /* Increased padding */
+    border-radius: 1rem;
+    /* Rounded corners */
+    width: 90%;
+    /* Responsive width */
+    max-width: 600px;
+    /* Max width */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Online Exam specific styles */
+.main-content-wrapper {
+    flex-grow: 1;
+    /* Allows it to take up available space between header and footer */
+    padding-top: 6rem;
+    /* Adjust for fixed header height */
+    padding-bottom: 2rem;
+    /* Ensure some space before the footer */
+    padding-left: 1.5rem;
+    /* Added horizontal padding for wider content */
+    padding-right: 1.5rem;
+    /* Added horizontal padding for wider content */
+}
+
+.exam-card {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 1000px;
+    /* Increased max-width for admin-like feel */
+    width: 100%;
+    /* Ensure it takes full width up to max-width */
+    margin: 0 auto;
+    /* Center the card */
+}
+
+.timer-box {
+    background-color: #e0f2f7;
+    /* Light blue */
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2980B9;
+}
+
+.question-card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.question-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #34495E;
+    margin-bottom: 1rem;
+}
+
+.form-check-label {
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+
+.form-check-input:checked+.form-check-label {
+    background-color: #cfe2ff;
+    /* Light blue for selected option */
+    color: #0d6efd;
+    font-weight: 500;
+}
+
+.form-check-label:hover {
+    background-color: #f0f2f5;
+}
+
+/* Adjusted button styles directly with Tailwind for better visibility */
+.btn-primary-custom {
+    background-color: #3B82F6;
+    /* Tailwind blue-500 */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    /* Larger padding */
+    border-radius: 9999px;
+    /* Fully rounded */
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary-custom:hover {
+    background-color: #2563EB;
+    /* Tailwind blue-600 */
+    transform: translateY(-2px);
+}
+
+.btn-secondary-custom {
+    background-color: #6B7280;
+    /* Tailwind gray-500 */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-secondary-custom:hover {
+    background-color: #4B5563;
+    /* Tailwind gray-600 */
+    transform: translateY(-2px);
+}
+
+.btn-success-custom {
+    background-color: #10B981;
+    /* Tailwind green-500 */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-success-custom:hover {
+    background-color: #059669;
+    /* Tailwind green-600 */
+    transform: translateY(-2px);
+}
+
+.nav-buttons button:disabled {
+    opacity: 0.5;
+    /* Reduce opacity for disabled buttons */
+    cursor: not-allowed;
+    transform: none;
+    /* Remove hover transform for disabled */
+    box-shadow: none;
+    /* Remove shadow for disabled */
+}
+
+#examResult {
+    display: none;
+    /* Hidden by default */
+    margin-top: 2rem;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #badbcc;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+/* Review answers section styles */
+#reviewAnswersSection {
+    display: none;
+    /* Hidden by default */
+    margin-top: 2rem;
+}
+
+.review-question-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.review-question-card .question-title {
+    margin-bottom: 0.75rem;
+}
+
+.review-option {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+.review-option.correct {
+    background-color: #d4edda;
+    /* green-100 */
+    color: #155724;
+    /* green-800 */
+    border: 1px solid #badbcc;
+    /* green-300 */
+}
+
+.review-option.incorrect {
+    background-color: #f8d7da;
+    /* red-100 */
+    color: #721c24;
+    /* red-800 */
+    border: 1px solid #f5c6cb;
+    /* red-300 */
+}
+
+.review-option.selected {
+    font-weight: 600;
+}
+
+.review-icon {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.review-icon.correct {
+    color: #28a745;
+}
+
+/* Bootstrap green */
+.review-icon.incorrect {
+    color: #dc3545;
+}
+
+/* Bootstrap red */
+
+
+/* Mobile menu overlay transitions from online-school-website-design-tailwind */
+.mobile-menu-open {
+    opacity: 1;
+    display: flex;
+}
+
+.mobile-menu-closed {
+    opacity: 0;
+    display: none;
+}
+
+/* Style for a standard text input field (e.g., short answer, name, email) */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+/* Also include number inputs if used */
+input[type="password"] {
+    /* Layout and Sizing */
+    width: 100%;
+    /* Take up the full width of its containing element */
+    padding: 12px 15px;
+    /* Comfortable internal spacing */
+    margin: 8px 0;
+    /* Vertical spacing around the input */
+
+    /* Appearance */
+    border: 1px solid #ced4da;
+    /* Light gray border for a subtle look */
+    border-radius: 6px;
+    /* Slightly rounded corners */
+    font-size: 16px;
+    /* Standard reading size */
+    color: #495057;
+    /* Dark text color for high contrast */
+    background-color: #f8f9fa;
+    /* Very light gray background for a subtle distinction */
+
+    /* Interaction and Transition */
+    box-sizing: border-box;
+    /* Ensures padding/border don't increase the total width */
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    outline: none;
+    /* Remove the default browser focus outline */
+}
+
+/* Style when the input field is actively focused by the user */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff;
+    /* Primary color (e.g., blue) to indicate focus */
+    background-color: #ffffff;
+    /* Change background to white when focused */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    /* Light blue glow effect */
+}

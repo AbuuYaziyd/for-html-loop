@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Print</title>
+</head>
+
+<body>
+        <h1>Hongera:</h1>
+        <p id="dataDisplay"></p>
+        <span id="output"></span>
+        <button onclick="copyText()">Copy</button>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                // 1. Retrieve the stored data from localStorage
+                const storedData = localStorage.getItem('formSubmissionData');
+
+                if (storedData) {
+                    // 2. Parse the JSON string back into a JavaScript object
+                    const formData = JSON.parse(storedData);
+
+                    // 3. Display the retrieved data
+                    const displayElement = document.getElementById('dataDisplay');
+                    displayElement.innerHTML = `
+                        <p>Namba Uloweka ni: ${formData.count}</p>
+                    `;
+                    
+                    const outputDiv = document.getElementById("output");
+                    let content = ""; // Initialize an empty string to build the content
+
+                    for (let i = 1; i <= formData.count; i++) {
+                        content += i + ","; // Append each iteration's content
+                    }
+
+                    outputDiv.innerHTML = content; // Set the innerHTML of the div once
+
+                    // 4. Optional: Clear the data after retrieving it
+                    localStorage.removeItem('formSubmissionData');
+                } else {
+                    document.getElementById('dataDisplay').textContent = 'Hakuna Data, Jaribu Tena.';
+                }
+            });
+            
+                function copyText() {
+                    const spanElement = document.getElementById('output');
+                    const text = spanElement.innerText;
+                    navigator.clipboard.writeText(text)
+                        .then(() => {
+                            alert("Imekopi!");
+                        })
+                        .catch(err => {
+                            alert.error("Error! : ", err);
+                        });
+                }
+        </script>
+</body>
+
+</html>
